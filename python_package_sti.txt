@@ -1,0 +1,5 @@
+#You need to install these packages in anaconda first!
+
+conda install -c rapidsai python-whois
+conda install -c anaconda pandas
+conda install -c anaconda scikit-learn
