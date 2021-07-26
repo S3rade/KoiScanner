@@ -1,0 +1,168 @@
+import tkinter as tk
+from tkinter.constants import END
+import pandas
+import win32com.client
+import imaplib
+import email
+from email.header import decode_header
+import webbrowser
+import os
+import sys
+import whois
+import requests
+import time
+import json
+
+
+col_list = ["url"]
+df = pandas.read_csv('malicious.csv', usecols=col_list)
+
+API_key = '9a620234276d322d185e00b59e25242ec06464b994c556d392d2ded861f2e9fe'
+url = 'https://www.virustotal.com/vtapi/v2/url/report'
+parameters = {'apikey': API_key, 'resource': df}
+response= requests.get(url=url, params=parameters)
+json_response= json.loads(response.text)
+
+# Connect to inbox
+username = 'tpmpuser123@gmail.com'
+password = 'Tp@mpuser999'
+mail_server = 'imap.gmail.com'
+imap_server = imaplib.IMAP4_SSL(host=mail_server)
+imap_server.login(username, password)
+imap_server.select('Inbox')  # Default is `INBOX`
+
+search_criteria = 'ALL'
+charset = None  # All
+respose_code, message_numbers_raw = imap_server.search(charset, search_criteria)
+message_numbers = message_numbers_raw[0].split()
+
+
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.master = master
+        self.pack()
+        self.create_widgets()
+
+    def create_widgets(self):
+        #self.hi_there = tk.Button(self)
+        #self.hi_there["text"] = "Hello World\n(click me)"
+        #self.hi_there["command"] = self.say_hi
+        #self.hi_there.grid(side="top")
+
+        self.fullEmailScanner = tk.Button(self)
+        self.fullEmailScanner["text"]= "Scan Full Email"
+        self.fullEmailScanner["command"] = self.onload
+        self.fullEmailScanner.grid(column=1 ,row=2)
+
+        self.urlScanner = tk.Button(self)
+        self.urlScanner["text"]= "Scan URL Only"
+        self.urlScanner["command"] = self.scanner
+        self.urlScanner.grid(column=2 ,row=2)
+
+        self.urlScanner = tk.Button(self)
+        self.urlScanner["text"]= "Clear"
+        self.urlScanner["command"] = self.rebuild
+        self.urlScanner.grid(column=3 ,row=2)
+
+        self.quit = tk.Button(self, text="QUIT", fg="red",
+                              command=self.master.destroy)
+        self.quit.grid(column=5 ,row=5)
+        
+
+    def onload(self):
+        maliciouslinks= tk.Listbox(root,width=100,height=20)
+        retreivingePrint=tk.Label(root, text="Retreiving Emails")
+        retreivingePrint.pack()
+        scanningPrint=tk.Label(root, text="Scanning Emails")
+        scanningPrint.pack()
+        for message_number in message_numbers:
+            response_code, message_data = imap_server.fetch(message_number, '(RFC822)')
+            for response in message_data:
+                #print(response)
+                if isinstance(response, tuple):
+                    
+                    # parse a bytes email into a message object
+                    msg = email.message_from_bytes(response[1])
+                    subject = msg.get("Subject", None)
+                    getFrom = msg.get("From", None)
+                    #getFrom = getFrom.split()
+                    #getFrom = getFrom[-1].strip('<>')
+                    returnPath = msg.get("Return-Path", None)
+                    returnPath = returnPath.strip('<>')
+                    receivedSPF = msg.get("Received-SPF", None).split()
+                    
+                    # if the email message is multipart
+                    if msg.is_multipart():
+                        # iterate over email parts
+                        for part in msg.walk():
+                            # extract content type of email
+                            content_type = part.get_content_type()
+                            content_disposition = str(part.get("Content-Disposition"))
+                            try:
+                                # get the email body
+                                body = part.get_payload(decode=True).decode()
+                                for link in df["url"]:
+                                    for letters in body.split():
+                                        if link == letters:
+                                            parameters = {'apikey': API_key, 'resource': link} #VirusTotal only can check each link
+                                            response= requests.get(url=url, params=parameters) # 4 times per minute!
+                                            json_response = json.loads(response.text)
+                                            if json_response['response_code'] <= 0:
+                                                getstatus = "empty"
+                                            elif json_response['response_code'] >= 1:
+                                                if json_response['positives'] <= 0:
+                                                    getstatus = "positive"
+                                                else:
+                                                    getstatus = "malicious"
+                                                    maliciouslinks.insert(END,link)
+                                            if getstatus == "malicious":
+                                                checkIP = whois.whois(link)
+                                                test = checkIP.get("domain_name", None)
+                                                imap_server.create('malicious')
+                                                imap_server.store(message_number, '+X-GM-LABELS', 'malicious')
+                                                imap_server.store(message_number, '+FLAGS', '\Deleted')  # read mail remove from inbox
+                                                imap_server.expunge()
+                                                print("Subject:", subject)
+                                                print("From:", getFrom)
+                                                print("Domain name that is malicious:", test)
+                                                print("Found email with malicious link!")
+                                                print("Malicious link:", letters)
+                                                print("")
+                                        elif receivedSPF[0] != "pass":
+                                            imap_server.create('malicious')
+                                            imap_server.store(message_number, '+X-GM-LABELS', 'malicious')
+                                            imap_server.store(message_number, '+FLAGS', '\Deleted')  # read mail remove from inbox
+                                            imap_server.expunge()
+                                            print("Subject:", subject)
+                                            print("From:", getFrom)
+                                            print("SPF Status:", receivedSPF[0], ". Not secure.")
+                                        else:
+                                            continue
+                            
+                            
+                            except:
+                                pass
+
+        Displaytext2 = tk.Label(root, text="The Following Links are malicious accoring to VirusTotal !")
+        Displaytext2.pack()
+        maliciouslinks.pack()
+
+        imap_server.close()
+        imap_server.logout()
+
+        
+
+    def scanner(self):
+        tk.Label(root, text="Please Enter the Link Below!").pack()
+
+    def rebuild(self):
+        print("testing")
+
+    def exit(self):
+        root.destroy()
+
+root = tk.Tk()
+app = Application(master=root)
+app.mainloop()
