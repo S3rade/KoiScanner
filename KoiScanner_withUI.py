@@ -144,7 +144,7 @@ class Application(tk.Frame):
                             except:
                                 pass
 
-        Displaytext2 = tk.Label(root, text="The Following Links are malicious accoring to VirusTotal !")
+        Displaytext2 = tk.Label(root, text="The Following Links are malicious according to VirusTotal !")
         Displaytext2.pack()
         maliciouslinks.pack()
 
