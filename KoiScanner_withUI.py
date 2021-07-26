@@ -54,21 +54,20 @@ class Application(tk.Frame):
         self.fullEmailScanner = tk.Button(self)
         self.fullEmailScanner["text"]= "Scan Full Email"
         self.fullEmailScanner["command"] = self.onload
-        self.fullEmailScanner.grid(column=1 ,row=2)
+        self.fullEmailScanner.grid(column=1 ,row=1)
 
         self.urlScanner = tk.Button(self)
         self.urlScanner["text"]= "Scan URL Only"
         self.urlScanner["command"] = self.scanner
-        self.urlScanner.grid(column=2 ,row=2)
+        self.urlScanner.grid(column=2 ,row=1)
 
         self.urlScanner = tk.Button(self)
         self.urlScanner["text"]= "Clear"
         self.urlScanner["command"] = self.rebuild
-        self.urlScanner.grid(column=3 ,row=2)
+        self.urlScanner.grid(column=3 ,row=1)
 
-        self.quit = tk.Button(self, text="QUIT", fg="red",
-                              command=self.master.destroy)
-        self.quit.grid(column=5 ,row=5)
+        self.quit = tk.Button(self, text="QUIT", fg="red",command=self.master.destroy)
+        self.quit.grid(column=5 ,row= 1)
         
 
     def onload(self):
@@ -158,11 +157,14 @@ class Application(tk.Frame):
         tk.Label(root, text="Please Enter the Link Below!").pack()
 
     def rebuild(self):
-        print("testing")
+        print("Testing")
 
     def exit(self):
         root.destroy()
 
+
 root = tk.Tk()
+root.title("KoiScanner")
+root.geometry('500x200')
 app = Application(master=root)
 app.mainloop()
