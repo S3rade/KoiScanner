@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter.constants import END
+from tkinter.ttk import *
 import pandas
 import win32com.client
 import imaplib
@@ -46,11 +47,6 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        #self.hi_there = tk.Button(self)
-        #self.hi_there["text"] = "Hello World\n(click me)"
-        #self.hi_there["command"] = self.say_hi
-        #self.hi_there.grid(side="top")
-
         self.fullEmailScanner = tk.Button(self)
         self.fullEmailScanner["text"]= "Scan Full Email"
         self.fullEmailScanner["command"] = self.onload
@@ -61,21 +57,15 @@ class Application(tk.Frame):
         self.urlScanner["command"] = self.scanner
         self.urlScanner.grid(column=2 ,row=1)
 
-        self.urlScanner = tk.Button(self)
-        self.urlScanner["text"]= "Clear"
-        self.urlScanner["command"] = self.rebuild
-        self.urlScanner.grid(column=3 ,row=1)
-
         self.quit = tk.Button(self, text="QUIT", fg="red",command=self.master.destroy)
         self.quit.grid(column=5 ,row= 1)
         
 
     def onload(self):
-        maliciouslinks= tk.Listbox(root,width=100,height=20)
-        retreivingePrint=tk.Label(root, text="Retreiving Emails")
-        retreivingePrint.pack()
-        scanningPrint=tk.Label(root, text="Scanning Emails")
-        scanningPrint.pack()
+        newWindow = tk.Toplevel(root)
+        newWindow.geometry('500x200')
+        newWindow.title("KoiScanner Results")
+        maliciouslinks= tk.Listbox(newWindow,width=100,height=20)
         for message_number in message_numbers:
             response_code, message_data = imap_server.fetch(message_number, '(RFC822)')
             for response in message_data:
@@ -143,9 +133,13 @@ class Application(tk.Frame):
                             
                             except:
                                 pass
-
-        Displaytext2 = tk.Label(root, text="The Following Links are malicious according to VirusTotal !")
+                    
+        Displaytext2 = tk.Label(newWindow, text="The Following Links are malicious according to VirusTotal !")
         Displaytext2.pack()
+        retreivingePrint=tk.Label(newWindow, text="Retreiving Emails")
+        retreivingePrint.pack()
+        scanningPrint=tk.Label(newWindow, text="Scanning Emails")
+        scanningPrint.pack()
         maliciouslinks.pack()
 
         imap_server.close()
@@ -156,8 +150,6 @@ class Application(tk.Frame):
     def scanner(self):
         tk.Label(root, text="Please Enter the Link Below!").pack()
 
-    def rebuild(self):
-        print("Testing")
 
     def exit(self):
         root.destroy()
