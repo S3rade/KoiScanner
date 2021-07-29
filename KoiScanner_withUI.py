@@ -1,5 +1,6 @@
+from collections import UserList
 import tkinter as tk
-from tkinter.constants import END
+from tkinter.constants import END, W
 from tkinter.ttk import *
 import pandas
 import win32com.client
@@ -13,7 +14,10 @@ import whois
 import requests
 import time
 import json
-
+from tldextract import tldextract
+from whiteBlacklist import WhiteBlackApp
+import joblib
+import pyfiglet
 
 col_list = ["url"]
 df = pandas.read_csv('malicious.csv', usecols=col_list)
@@ -148,8 +152,47 @@ class Application(tk.Frame):
         
 
     def scanner(self):
-        tk.Label(root, text="Please Enter the Link Below!").pack()
+        
+        newWindow2 = tk.Toplevel(root)
+        newWindow2.geometry('500x200')
+        newWindow2.title("KoiScanner for URL Link")
 
+        def scan_url():
+            results_scanner = "False"
+
+            urltoscan = user_input.get()
+            for link in df["url"]:
+                for letters in urltoscan.split():
+                    if link == letters:
+                        parameters = {'apikey': API_key, 'resource': link} #VirusTotal only can check each link
+                        response= requests.get(url=url, params=parameters) # 4 times per minute!
+                        json_response = json.loads(response.text)
+                        if json_response['response_code'] <= 0:
+                            getstatus = "empty"
+                        elif json_response['response_code'] >= 1:
+                            if json_response['positives'] <= 0:
+                                getstatus = "positive"
+                            else:
+                                getstatus = "malicious"
+                                if getstatus == "malicious":
+                                    results_scanner="True"
+
+            newWindow3 = tk.Toplevel(newWindow2)
+            newWindow3.geometry('500x200')
+            newWindow3.title("KoiScanner for URL Link RESULTS")
+            if results_scanner == "True":
+                tk.Label(newWindow3, text="The Link IS Malicious").pack()
+            else:
+               tk.Label(newWindow3, text="The Link is NOT Malicious").pack()
+            tk.Button(newWindow3, text="QUIT", fg="red",command=newWindow3.destroy).pack()
+
+        tk.Label(newWindow2, text="Please Enter the Link Below!").pack()
+        user_input = tk.StringVar(newWindow2)
+        entry = tk.Entry(newWindow2, textvariable=user_input).pack()
+        button1 = tk.Button(newWindow2,text='Scan the URL', command=scan_url).pack()
+        
+        tk.Button(newWindow2, text="QUIT", fg="red",command=newWindow2.destroy).pack()
+        
 
     def exit(self):
         root.destroy()
