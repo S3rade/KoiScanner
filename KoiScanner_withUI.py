@@ -1,7 +1,7 @@
 from collections import UserList
 import tkinter as tk
+from tkinter import ttk
 from tkinter.constants import END, W
-from tkinter.ttk import *
 import pandas
 import win32com.client
 import imaplib
@@ -42,34 +42,34 @@ respose_code, message_numbers_raw = imap_server.search(charset, search_criteria)
 message_numbers = message_numbers_raw[0].split()
 
 
-
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
-        self.pack()
+        self.pack()        
         self.create_widgets()
 
     def create_widgets(self):
-        self.fullEmailScanner = tk.Button(self)
+        paddings = {'padx': 5, 'pady': 5 }
+        self.fullEmailScanner = tk.Button(self,**paddings)
         self.fullEmailScanner["text"]= "Scan Full Email"
         self.fullEmailScanner["command"] = self.onload
-        self.fullEmailScanner.grid(column=1 ,row=1)
+        self.fullEmailScanner.grid(column=0 ,row=1)
 
-        self.urlScanner = tk.Button(self)
+        self.urlScanner = tk.Button(self,**paddings)
         self.urlScanner["text"]= "Scan URL Only"
         self.urlScanner["command"] = self.scanner
-        self.urlScanner.grid(column=2 ,row=1)
+        self.urlScanner.grid(column=1 ,row=1)
 
-        self.quit = tk.Button(self, text="QUIT", fg="red",command=self.master.destroy)
-        self.quit.grid(column=5 ,row= 1)
-        
+        self.quit = tk.Button(self, text="QUIT", fg="red",command=self.master.destroy,**paddings)
+        self.quit.grid(column=2 ,row= 1)       
 
     def onload(self):
         newWindow = tk.Toplevel(root)
         newWindow.geometry('500x200')
         newWindow.title("KoiScanner Results")
         maliciouslinks= tk.Listbox(newWindow,width=100,height=20)
+        paddings = {'padx': 5, 'pady': 5}
         for message_number in message_numbers:
             response_code, message_data = imap_server.fetch(message_number, '(RFC822)')
             for response in message_data:
@@ -138,11 +138,11 @@ class Application(tk.Frame):
                             except:
                                 pass
                     
-        Displaytext2 = tk.Label(newWindow, text="The Following Links are malicious according to VirusTotal !")
+        Displaytext2 = tk.Label(newWindow, text="The Following Links are malicious according to VirusTotal !",**paddings)
         Displaytext2.pack()
-        retreivingePrint=tk.Label(newWindow, text="Retreiving Emails")
+        retreivingePrint=tk.Label(newWindow, text="Retreiving Emails",**paddings)
         retreivingePrint.pack()
-        scanningPrint=tk.Label(newWindow, text="Scanning Emails")
+        scanningPrint=tk.Label(newWindow, text="Scanning Emails",**paddings)
         scanningPrint.pack()
         maliciouslinks.pack()
 
@@ -154,7 +154,7 @@ class Application(tk.Frame):
     def scanner(self):
         
         newWindow2 = tk.Toplevel(root)
-        newWindow2.geometry('500x200')
+        newWindow2.geometry('400x230')
         newWindow2.title("KoiScanner for URL Link")
 
         def scan_url():
@@ -178,8 +178,9 @@ class Application(tk.Frame):
                                     results_scanner="True"
 
             newWindow3 = tk.Toplevel(newWindow2)
-            newWindow3.geometry('500x200')
+            newWindow3.geometry('400x230')
             newWindow3.title("KoiScanner for URL Link RESULTS")
+
             if results_scanner == "True":
                 tk.Label(newWindow3, text="The Link IS Malicious").pack()
             else:
@@ -200,6 +201,11 @@ class Application(tk.Frame):
 
 root = tk.Tk()
 root.title("KoiScanner")
-root.geometry('500x200')
+root.geometry('400x230')
+bg = tk.PhotoImage(file = "D:/School Stuff/STI/KoiScanner/images/title_logo2.png")
+canvas1 = tk.Canvas( root, width = 300, height = 100)  
+canvas1.pack(fill = "both", expand = True)
+canvas1.create_image( 0, 0, image = bg,anchor = "nw")
+
 app = Application(master=root)
 app.mainloop()
