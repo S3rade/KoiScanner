@@ -15,7 +15,6 @@ import requests
 import time
 import json
 from tldextract import tldextract
-from whiteBlacklist import WhiteBlackApp
 import joblib
 import pyfiglet
 
@@ -140,10 +139,6 @@ class Application(tk.Frame):
                     
         Displaytext2 = tk.Label(newWindow, text="The Following Links are malicious according to VirusTotal !",**paddings)
         Displaytext2.pack()
-        retreivingePrint=tk.Label(newWindow, text="Retreiving Emails",**paddings)
-        retreivingePrint.pack()
-        scanningPrint=tk.Label(newWindow, text="Scanning Emails",**paddings)
-        scanningPrint.pack()
         maliciouslinks.pack()
 
         imap_server.close()
