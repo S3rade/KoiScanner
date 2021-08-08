@@ -298,7 +298,7 @@ class Application(tk.Frame):
             results_scanner = "False"
 
             urltoscan = user_input.get()
-            for result in df["url"]:
+            for result in mails["url"]:
                 for letters in urltoscan.split():
                     if result == letters:
                         parameters = {'resource': result} #VirusTotal only can check each link
