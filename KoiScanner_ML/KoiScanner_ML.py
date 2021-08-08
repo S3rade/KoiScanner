@@ -61,48 +61,6 @@ for i in range(ds.shape[0]):
 trainData = ds.loc[trainIndex]
 testData = ds.loc[testIndex]
 
-#To show 75% of data has been seperated
-trainData.reset_index(inplace = True)
-trainData.drop(['index'], axis = 1, inplace = True)
-trainData.head()
-
-trainData['label'].value_counts()
-
-#To show 25% of data has been seperated
-testData.reset_index(inplace = True)
-testData.drop(['index'], axis = 1, inplace = True)
-testData.head()
-
-testData['label'].value_counts()
-ds.head() # To show dataset is Randomized
-
-ds['label'].value_counts() # Show how many "bad" & "good" urls
-
-totalMails = 344821 + 75643
-# To spilt Training Data to 75% and Testing Data into 25%
-trainIndex, testIndex = list(), list()
-for i in range(ds.shape[0]):
-    if np.random.uniform(0, 1) < 0.75:
-        trainIndex += [i]
-    else:
-        testIndex += [i]
-trainData = ds.loc[trainIndex]
-testData = ds.loc[testIndex]
-
-#To show 75% of data has been seperated
-trainData.reset_index(inplace = True)
-trainData.drop(['index'], axis = 1, inplace = True)
-trainData.head()
-
-trainData['label'].value_counts()
-
-#To show 25% of data has been seperated
-testData.reset_index(inplace = True)
-testData.drop(['index'], axis = 1, inplace = True)
-testData.head()
-
-testData['label'].value_counts()
-
 #To tokenize the dataset
 def process_message(message, lower_case = True, stem = True, stop_words = True, gram = 2):
     if lower_case:
