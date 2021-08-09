@@ -1,4 +1,3 @@
-from KoiScanner_withUI import API_key
 import nltk
 nltk.download('punkt')
 from random import shuffle
@@ -33,8 +32,16 @@ import pyfiglet
 url_list = ["url"]
 df = pd.read_csv('malicious.csv', usecols=url_list)
 
+
+API_key = '9a620234276d322d185e00b59e25242ec06464b994c556d392d2ded861f2e9fe'
+url = 'https://www.virustotal.com/vtapi/v2/url/report'
+parameters = {'apikey': API_key, 'resource': df}
+response= requests.get(url=url, params=parameters)
+json_response= json.loads(response.text)
+
 mails = pd.read_csv('data.csv', encoding = 'latin-1')
 ds = mails.sample(frac=1).reset_index(drop=True) # To randomize the dataset
+
 
 
 # Connect to inbox
@@ -346,4 +353,3 @@ canvas1.create_image( 0, 0, image = bg,anchor = "nw")
 
 app = Application(master=root)
 app.mainloop()
-
