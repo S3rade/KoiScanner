@@ -20,9 +20,7 @@ Fair Warning This is just a BETA Programme.
 
 # Use Case Diagrams
 
-For better clarity, please download the Images.
-
-In the Images Folder.
+For better clarity, please download the Images from the Images Folder.
 
 ## KoiScanner GUI and Google Chrome Extension Use Case Diagram
 
