@@ -18,5 +18,13 @@ Fair Warning This is just a BETA Programme.
 
 5) `Malicious.csv` is the dataset that contain ONLY MALICIOUS URL. 
 
+## Use Case Diagrams
+# KoiScanner GUI and Google Chrome Extension Use Case Diagram
+
+![Use Diagram KoiScanner Gui and Chrome](https://github.com/Serade12/KoiScanner/blob/main/Images/KOISCANNER.png)
+
+# KoiScanner Telegram Bot Use Case Diagram
+
+![Use Diagram KoiScanner Telegram](https://github.com/Serade12/KoiScanner/blob/main/Images/Telegram_Bot.png)
 
 
