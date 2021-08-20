@@ -33,7 +33,14 @@
 
 ![train3](https://user-images.githubusercontent.com/73679712/130199420-be4c201c-2092-42c8-9d6b-7daad54891e9.JPG)
 
-**
+**Bag of Words: In Bag of words model we find the ‘term frequency’, i.e. number of occurrences of each word in the dataset. Thus for word w,**
+
+![1_k5hw9fat8QqCxhslpfyTpw](https://user-images.githubusercontent.com/73679712/130200823-a10059a4-3f76-43fa-b322-c5f8a076cd42.png)
+ 
+**and**
+
+![two](https://user-images.githubusercontent.com/73679712/130200932-4d7625d7-8501-4961-bcad-4dafb6605d10.png)
+
 
 ![train4](https://user-images.githubusercontent.com/73679712/130199443-846d70b4-8884-496d-a520-34b8ad49507d.JPG)
 
