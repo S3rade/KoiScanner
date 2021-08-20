@@ -37,7 +37,7 @@
 
 ![1_k5hw9fat8QqCxhslpfyTpw](https://user-images.githubusercontent.com/73679712/130200823-a10059a4-3f76-43fa-b322-c5f8a076cd42.png)
  
-and
+**and**
 
 ![two](https://user-images.githubusercontent.com/73679712/130200932-4d7625d7-8501-4961-bcad-4dafb6605d10.png)
 
