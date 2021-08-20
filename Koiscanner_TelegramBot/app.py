@@ -162,7 +162,7 @@ def scan_email(message):
                                     
                                     # Configure API key authorization: Apikey
                                     configuration = cloudmersive_virus_api_client.Configuration()
-                                    configuration.api_key['Apikey'] = '2c418a13-77a2-40e5-bc5b-9e9995ad7ff5'
+                                    configuration.api_key['Apikey'] = 'Please Paste API KEY Here'
 
                                     # create an instance of the API class
                                     api_instance = cloudmersive_virus_api_client.ScanApi(cloudmersive_virus_api_client.ApiClient(configuration))
@@ -239,7 +239,7 @@ def scan_email(message):
                                                         
                                                         # Use Cloudmersive API
                                                         configuration = cloudmersive_validate_api_client.Configuration()
-                                                        configuration.api_key['Apikey'] = '2c418a13-77a2-40e5-bc5b-9e9995ad7ff5'
+                                                        configuration.api_key['Apikey'] = 'Please Paste API KEY Here'
 
                                                         # create an instance of the API class
                                                         api_instance12 = cloudmersive_validate_api_client.IPAddressApi(cloudmersive_validate_api_client.ApiClient(configuration))
@@ -292,7 +292,7 @@ def scan_email(message):
                                                         ipqualityscorescan = ipqualityscorescan.replace(' ', '%20')
                                                         ipqualityscorescan = ipqualityscorescan.replace('~', '%7E')
                                                         ipqualityscorescan = ipqualityscorescan.replace('-', '%2D')
-                                                        ipqualityapi_key = "TDroJChf66VYvaWJMLnMsg9UnlQ6rsgS"
+                                                        ipqualityapi_key = "Please Paste API KEY Here"
                                                         ipqualityscorescan1 = "https://ipqualityscore.com/api/json/url/"+ipqualityapi_key+"/"+ipqualityscorescan
                                                         print(ipqualityscorescan1)
                                                         with urllib.request.urlopen(ipqualityscorescan1) as urlquality:
