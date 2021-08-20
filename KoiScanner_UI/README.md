@@ -31,7 +31,7 @@ The Link to obtain IPQualityScore API Key is [here](https://www.ipqualityscore.c
 #### Connects to the user's email and password and scans all the Inbox emails. Furthermore, message_numbers are the id for each of the emails.
 
 ![image](https://user-images.githubusercontent.com/86769746/130253764-62168ce9-96ff-47d0-aabc-d0c7649cf9d8.png)
-#### The email scanner uses the Tkinker GUI package to create the windows to scan the emails or URLs and the email results and email attachments results.
+#### The email scanner uses the Tkinter GUI package to create the windows to scan the emails or URLs and the email results and email attachments results.
 
 ![image](https://user-images.githubusercontent.com/86769746/130254657-a4789896-0db1-46a4-a9c1-3a381791a80c.png)
 #### For every email ID in the Inbox, it will get an electronic message format consisting of header fields and an optional message body of the email. It will get the data of the email like subject,from, to, date, message ID, SPF and sender's IP address.
@@ -73,7 +73,7 @@ The Link to obtain IPQualityScore API Key is [here](https://www.ipqualityscore.c
 #### The email scanner will scan the link that the user has input and check whether or not if the link sent is malicious or not.
 
 ![image](https://user-images.githubusercontent.com/86769746/130261169-fc4a0880-518f-49ba-9349-28dbfc7329d5.png)
-#### Use an image for the KoiScanner and loop the Tkinker package.
+#### Use an image for the KoiScanner and loop the Tkinter package.
 
 # Results for the output of the scanned email logs
 
