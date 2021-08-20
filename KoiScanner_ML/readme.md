@@ -3,4 +3,26 @@
 ## Disclaimer
 **This Machine Learning Codes are not fully implemented in the Koi Scanner. However, they do work separately.** 
 
+## Step 1
+
 ![1](https://user-images.githubusercontent.com/73679712/130197122-af0a10e9-a06e-4f9d-9a9c-2c21dfefbea6.JPG)
+
+For the first step in machine learning, we read the csv file that contains malicious and non malicious urls. We then randomized the data for further use.
+
+## Step 2
+
+![2](https://user-images.githubusercontent.com/73679712/130197656-60590886-f2d5-4796-a6c4-8a58ffb61ea8.JPG)
+
+![Traindata75](https://user-images.githubusercontent.com/73679712/130198265-371822cc-838f-4f13-95a8-9f08d55b3450.JPG)
+
+![Testdata25](https://user-images.githubusercontent.com/73679712/130198336-0873aa55-786c-433d-be62-a343e7cc7e83.JPG)
+
+Next we split the data into 75% Training Data and 25% Testing Data. With the training data, it will be used to create a trained model that will be used on the testing data to determine how well the trained model can detect urls that are malicious and non malicious.
+
+## Step 3
+
+![tokenize](https://user-images.githubusercontent.com/73679712/130198386-09699fe6-8182-433d-b4c8-5ed0e58ac1af.JPG)
+
+Before training the data, we made all the urls lower case. Next we tokenize each url. Tokenization is the process of splitting up the urls into pieces and removing punctuation characters. We then did stemming and used Porter Stammer, which is a famous stemming algorithm to replace all similar words.
+
+## Step 4
