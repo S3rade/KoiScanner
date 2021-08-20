@@ -1,5 +1,10 @@
 # KoiScanner
-KoiScanner is a Software that scans for Phishing emails. 
+
+Phishing Emails has been one of the most popular attack vectors for cyber criminals. The emails sent may contain malicious links that once clicked will lead to a website that will steal login credentials or financial information of users. 
+
+KoiScanner is a protective aid product which allows users to scan their emails for malicious URLS. This scan can be regularly set by users or on demand via Google Chrome extension, Executable UI or via instant messaging software,Telegram.This will help separate the malicious emails(including malicious urls that are caught and blacklisted) from your regular inbox.
+
+To solve this issue, our proposed solution is to create a google extension that will scan emails for malicious urls. Our project will scan emails on a regular basis or on demand if the user chooses to do so. By implementing our project it helps the user to prevent any loss of data by ensuring that any malicious urls are caught and blacklisted.
 
 # Disclaimers
 Some Products are not working, Some API Keys have been removed and require your edits to make it work. 
