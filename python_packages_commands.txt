@@ -1,0 +1,8 @@
+#You need to install these packages first!
+
+pip install cloudmersive-validate-api-client
+pip install cloudmersive-virus-api-client
+pip install pandas
+pip install python-imap
+pip install tk
+pip install tldextract
