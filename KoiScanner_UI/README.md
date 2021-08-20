@@ -1,5 +1,5 @@
 # KoiScanner UI Version
-This work alone but you will require to add in your own API key from Cloudmersive and IPqualityScore.
+This work alone but *you will require to add in your own API key from Cloudmersive and IPqualityScore*.
 
 ##  Lines that require API Key from Cloudmersive
 Lines 144 & 235 requires you to key in Cloudmersive API Key
