@@ -22,6 +22,8 @@ Fair Warning This is just a BETA Programme.
 
 For better clarity, please download the Images.
 
+In the Images Folder.
+
 ## KoiScanner GUI and Google Chrome Extension Use Case Diagram
 
 ![Use Diagram KoiScanner Gui and Chrome](https://github.com/Serade12/KoiScanner/blob/main/Images/KOISCANNER.png)
