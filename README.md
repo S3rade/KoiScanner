@@ -10,13 +10,15 @@ Fair Warning This is just a BETA Programme.
 
 1) `KoiScanner_ML` are implemented Machine Learning Codes that collapsed and is not a working product.
 
-2) `KoiScanner_UI` contains the codes that does not have Machine Learning and just regular API checking. 
+2) `KoiScanner_UI` contains the codes that does not have Machine Learning and just regular API checking.
 
-3) `KoiScanner_TelegramBot` contains the codes of KoiScanner_UI but adjusted to accomodate for the convicence.
+3) `KoiScanner_Chrome_Extension` contains the codes and scripts for the google chrome Extension.
 
-4) `Data.csv` is the dataset that contains both MALICIOUS AND NON-MALICIOUS URL.
+4) `KoiScanner_TelegramBot` contains the codes of KoiScanner_UI but adjusted to accomodate for the convicence.
 
-5) `Malicious.csv` is the dataset that contain ONLY MALICIOUS URL. 
+5) `Data.csv` is the dataset that contains both MALICIOUS AND NON-MALICIOUS URL.
+
+6) `Malicious.csv` is the dataset that contain ONLY MALICIOUS URL. 
 
 # Use Case Diagrams
 
